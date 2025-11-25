@@ -175,12 +175,8 @@ class Coin():
     def draw(self, screen, coin):
         screen.blit(self.img, self.img_rect)
         self.coin_text = self.font.render(str(coin), True, (0,0,0))
-        self.coin_text_rect = self.coin_text.get_rect(topleft=(self.width + 50, self.height))
+        self.coin_text_rect = self.coin_text.get_rect(midleft=(self.width + 50, self.height))
         screen.blit(self.coin_text, self.coin_text_rect)
-        
-
-
-
 
 class FloppyBird():
     def __init__(self):
@@ -206,9 +202,9 @@ class FloppyBird():
         self.bird = Bird()
         self.pipe = Pipe(self.width, self.height)
         self.coin = Coin(self.width - 200, int(self.height/20))
+        self._coin = 0
         pygame.time.set_timer(self.pipe_pop, 2000)
         self.pipe.add()
-        self._coin = 0
         self.point =  0
         self.running = True
         self.gameStop = False
@@ -229,6 +225,7 @@ class FloppyBird():
                 self.bird.draw(self.screen)
                 self.pipe.draw(self.screen)
                 self.coin.draw(self.screen, self._coin)
+
                 self.score_text = self.font.render(f"Score: {self.point}", True, (255,255,255), (0,0,255))
                 self.score_text_rect = self.score_text.get_rect(midtop=(self.width / 2, 0))
                 self.screen.blit(self.score_text, self.score_text_rect)
